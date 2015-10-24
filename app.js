@@ -42,6 +42,8 @@ app.get('/', function(req, res) {
 
 app.post('/1/api/async/recognizespeech/v1?file=testspeech.m4a');
 
+app.get()
+
 // Get token using your credentials
 app.post('/api/token', function(req, res, next) {
   authService.getToken({url: config.url}, function(err, token) {
