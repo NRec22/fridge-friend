@@ -20,7 +20,8 @@ var express      = require('express'),
     app          = express(),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
-    watson       = require('watson-developer-cloud');
+    watson       = require('watson-developer-cloud'),
+    text         = require('./src/views/displaymetadata.js');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -39,10 +40,7 @@ app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
 
-app.post('/results', function(req, res) {
-  var re = //;
-  
-});
+app.post('/1/api/async/recognizespeech/v1?file=testspeech.m4a');
 
 // Get token using your credentials
 app.post('/api/token', function(req, res, next) {
