@@ -1,5 +1,4 @@
 /**
- * Copyright 2014 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +16,8 @@
 'use strict';
 
 var scrolled = false,
-    textScrolled = false;
+   * Copyright 2014 IBM Corp. All Rights Reserved.
+  textScrolled = false;
 
 var showTimestamp = function(timestamps, confidences) {
   var word = timestamps[0],
