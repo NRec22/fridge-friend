@@ -32,16 +32,16 @@ module.exports = handleInp;
 var insertFood = function(db, num, name){
     var collection = db.collection('inventory');
 
-    // if there exists an expiration, cross reference the expiration table
-    if (days === true){
-        day = referExpiration(name);
-        console.log("Days until expiration for " + name + " added.");
+    // cross reference the expiration table with the name
+    var days = referExpiration(name);
+    console.log("Days until expiration for " + name + " added.");
     }
 
     // insert the food and its attributes
     collection.insert(
-        {"quantity": num, "type": name, "exp": day}
+        {"quantity": num, "type": name, "exp": days}
     );
+
     console.log("Inserted " + name + " into the inventory");
 };
 
@@ -49,23 +49,20 @@ var subtractFood = function(db, subtractNum, name){
     var collection = db.collection('inventory');
     var negateNum = subtractNum * (-1);
 
-    // //remove the food if result is 0
-    // if(updateNum === 0){
-    //     removeFood(db, name);
-    // }
-
     //subtract the food
     collection.update(
       {"type": name}, {$inc: {"quantity": negateNum}}
     );
 
+    //don't worry, this works
+    console.log("Quantity of " + name + " was updated!");
+
     //remove the food item when quantity is zero
     var currentItem = collection.findOne({"type: name"}));
     var currentQuantity = currentItem.num;
-    removeFood(db, )
-    
-    //don't worry, this works
-    console.log("Quantity of " + name + " was updated!");
+    if(currentQuantity === 0){
+      removeFood(db, name);
+    }
 };
 
 var removeFood = function(db, name){
@@ -82,7 +79,7 @@ var removeFood = function(db, name){
 var expirationTable = {};
 expirationTable["apple"] = 7;
 expirationTable["orange"] = 7;
-expirationTable["banana"] = 2;
+expirationTable["banana"] = 3;
 expirationTable["potato"] = 30;
 expirationTable["milk"] = 14;
 expirationTable["eggs"] = 18;
