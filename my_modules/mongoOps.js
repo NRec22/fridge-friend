@@ -1,12 +1,16 @@
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+//var mongodb = require()
 
 // Connection URL
-var url = 'mongodb://localhost:27017/myproject';
+var url = 'mongodb://localhost:27017/test';
 // Use connect method to connect to the Server
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
   console.log("Connected correctly to server");
+  db.open
+  db.collection('inventory', {strict:true}, function(err, collection) {});
+  //var collection = db.collection('inventory');
   // insertFood(db, 5, "apple", true);
   // insertFood(db, 3, "orange", true);
   // subtractFood(db, 5, 3, "apple");
@@ -15,18 +19,19 @@ MongoClient.connect(url, function(err, db) {
   // insertFood(db, 4, "beans", false);
   // updateExpiration(db);
   // expirationCheck(db);
-  // db.close();
+  //db.close();
 });
 
 var handleInp = function(input) {
-  if(input[0])
-    insertFood(db,input.quantity,input.type);
+
+  input = {add:true,quantity:3,unit:'',type:'apple'}
+  if(input[0]===true)
+    insertFood(this.db,input.quantity,input.type);
   else
-    subtractFood(db,input.quantity,input.type);
+    subtractFood(this.db,input.quantity,input.type);
 
 }
 
-module.exports = handleInp;
 
 // takes database, quantity, food, and where it is perishable
 var insertFood = function(db, num, name){
@@ -35,7 +40,7 @@ var insertFood = function(db, num, name){
     // cross reference the expiration table with the name
     var days = referExpiration(name);
     console.log("Days until expiration for " + name + " added.");
-    }
+    
 
     // insert the food and its attributes
     collection.insert(
@@ -43,10 +48,10 @@ var insertFood = function(db, num, name){
     );
 
     console.log("Inserted " + name + " into the inventory");
-};
+}
 
 var subtractFood = function(db, subtractNum, name){
-    var collection = db.collection('inventory');
+    //var collection = db.collection('inventory');
     var negateNum = subtractNum * (-1);
 
     //subtract the food
@@ -58,7 +63,7 @@ var subtractFood = function(db, subtractNum, name){
     console.log("Quantity of " + name + " was updated!");
 
     //remove the food item when quantity is zero
-    var currentItem = collection.findOne({"type: name"}));
+    var currentItem = collection.findOne({"type": name});
     var currentQuantity = currentItem.num;
     if(currentQuantity === 0){
       removeFood(db, name);
@@ -66,7 +71,7 @@ var subtractFood = function(db, subtractNum, name){
 };
 
 var removeFood = function(db, name){
-    var collection = db.collection('inventory');
+    //var collection = db.collection('inventory');
 
     collection.remove(
         {"type": name}
@@ -91,7 +96,7 @@ var referExpiration = function(name){
 
 //checks to see if the food flags a notification
 var expirationCheck = function(db){
-    var collection = db.collection('inventory')
+    //var collection = db.collection('inventory')
 
     collection.find(
         {"exp": {$lt: 4}}
@@ -101,10 +106,19 @@ var expirationCheck = function(db){
 
 //updates the food with expirations dates
 var updateExpiration = function(db){
-    var collection = db.collection('inventory');
+    //var collection = db.collection('inventory');
 
     collection.update(
         {"exp": {$ne: false}}, {$inc: {"exp": -1}}, {multi: true}
     );
     console.log("All foods with expirations were decremented.")
 };
+
+module.exports = handleInp;
+// exports.handler = handleInp;
+// exports.updateExp = updateExpiration;
+
+// module.exports = {
+//   handler: handleInp,
+//   updateExp: updateExpiration
+// }
