@@ -21,7 +21,8 @@ var express      = require('express'),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
     watson       = require('watson-developer-cloud'),
-    parse        = require('./my_modules/parseInput');
+    parse        = require('./my_modules/parseInput'),
+    mongo        = require('./my_modules/mongoOps');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -41,8 +42,9 @@ app.get('/', function(req, res) {
 });
 
 app.post('/text', function(req, res) {
-  var parsed = parse(req.body.text);
-  console.log(parsed);
+  mongo(parse(req.body.text));
+
+  // console.log(parsed);
 });
 
 // Get token using your credentials
