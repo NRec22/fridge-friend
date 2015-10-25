@@ -20,7 +20,8 @@ var express      = require('express'),
     app          = express(),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
-    watson       = require('watson-developer-cloud');
+    watson       = require('watson-developer-cloud'),
+    parse        = require('./my_modules/parseInput');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -40,9 +41,8 @@ app.get('/', function(req, res) {
 });
 
 app.post('/text', function(req, res) {
-  console.log(req.body);
-  //var parsed = parser.parse(req.body);
-  //console.log(parsed);
+  var parsed = parse(req.body.text);
+  console.log(parsed);
 });
 
 // Get token using your credentials
