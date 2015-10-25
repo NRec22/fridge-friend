@@ -20,7 +20,8 @@ var express      = require('express'),
     app          = express(),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
-    watson       = require('watson-developer-cloud');
+    watson       = require('watson-developer-cloud'),
+    text         = require('./src/views/displaymetadata.js');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -29,8 +30,8 @@ require('./config/express')(app);
 var config = extend({
   version: 'v1',
   url: 'https://stream.watsonplatform.net/speech-to-text/api',
-  username: '<username>',
-  password: '<password>'
+  username: '4581f165-b11d-47c6-81c4-cb5bb85ce443',
+  password: 'rZK9loQL4klv'
 }, vcapServices.getCredentials('speech_to_text'));
 
 var authService = watson.authorization(config);
@@ -39,9 +40,8 @@ app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
 
-app.post('/results', function(req, res) {
-  var re = //;
-  
+app.post('/text', function(req, res) {
+  console.log(req.body);
 });
 
 // Get token using your credentials
