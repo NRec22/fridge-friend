@@ -9,9 +9,9 @@ MongoClient.connect(url, function(err, db) {
   console.log("Connected correctly to server");
   insertFood(db, 5, "apple", 14, function(){
       insertFood(db, 3, "orange", 7, function(){
-          subtractFood(db, 2, "apple", function(){
-              db.close();
-          });
+          subtractFood(db, 5, 3, "apple");
+          subtractFood(db, 3, 3, "apple");
+          db.close();
       });
   });
 });
@@ -33,21 +33,35 @@ var insertFood = function(db, num, name, days, callback){
     );
 };
 
-var subtractFood = function(db, prevNum, saidNum, name, callback){
+var subtractFood = function(db, prevNum, subtractNum, name){
+    var collection = db.collection('inventory');
+    var updateNum = prevNum - subtractNum;
+    //subtract the food
+    if(updateNum === 0){
+        removeFood(db, name);
+    }
+    else{
+        collection.update(
+            {"type": name},
+            {
+                $set: {
+                    "quantity": updateNum
+                }
+            }
+        );
+        //don't worry, this works
+        console.log("Quantity was updated!");
+    }
+};
+
+var removeFood = function(db, name){
     var collection = db.collection('inventory');
 
-    //remove the food
-    collection.update(
-        {"type": name},
+    collection.remove(
         {
-            $set: {
-                "quantity": prevNum - saidNum
-            }
-        }, function(err, result){
-            assert.equal(err, null);
-            assert.equal(1, result.result.n);
-            console.log("Quantity changed in inventory.");
-            //callback(result);
+            "type": name
         }
     );
-};
+    //don't worry, this works
+    console.log("Food was removed");
+}
