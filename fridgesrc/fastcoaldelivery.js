@@ -16,13 +16,8 @@ MongoClient.connect(url, function(err, db) {
   updateExpiration(db);
   expirationCheck(db);
   db.close();
-              //db.close();
-          // db.close();
-          // prints out table and days of apple
-          // console.log(expirationTable);
-          //console.log(expirationTable["apple"]);
 });
-
+// takes database, quantity, food, and where it is perishable
 var insertFood = function(db, num, name, days){
     var collection = db.collection('inventory');
 
@@ -33,7 +28,9 @@ var insertFood = function(db, num, name, days){
     }
 
     // insert the food and its attributes
-    collection.insert({"quantity": num, "type": name, "exp": day});
+    collection.insert(
+        {"quantity": num, "type": name, "exp": day}
+    );
     console.log("Inserted " + name + " into the inventory");
 };
 
@@ -84,7 +81,9 @@ var referExpiration = function(name){
 var expirationCheck = function(db){
     var collection = db.collection('inventory')
 
-    collection.find({"exp": {$lt: 4}});
+    collection.find(
+        {"exp": {$lt: 4}}
+    );
     console.log("ExpirationCheck has been run.");
 };
 
@@ -92,6 +91,8 @@ var expirationCheck = function(db){
 var updateExpiration = function(db){
     var collection = db.collection('inventory');
 
-    collection.update({"exp": {$ne: false}}, {$inc: {"exp": -1}}, {multi: true});
+    collection.update(
+        {"exp": {$ne: false}}, {$inc: {"exp": -1}}, {multi: true}
+    );
     console.log("All foods with expirations were decremented.")
 };
