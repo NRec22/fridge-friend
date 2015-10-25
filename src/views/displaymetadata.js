@@ -1,4 +1,5 @@
 /**
+ * Copyright 2014 IBM Corp. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +17,7 @@
 'use strict';
 
 var scrolled = false,
-   * Copyright 2014 IBM Corp. All Rights Reserved.
-  textScrolled = false;
+    textScrolled = false;
 
 var showTimestamp = function(timestamps, confidences) {
   var word = timestamps[0],
@@ -161,7 +161,7 @@ exports.showResult = function(msg, baseString, model) {
 
     // if all words are mapped to nothing then there is nothing else to do
     if ((text.length === 0) || (/^\s+$/.test(text))) {
-    	 return baseString;
+       return baseString;
     }
 
     // capitalize first word
@@ -169,12 +169,16 @@ exports.showResult = function(msg, baseString, model) {
     if (msg.results && msg.results[0] && msg.results[0].final) {
        text = text.slice(0, -1);
        text = text.charAt(0).toUpperCase() + text.substring(1);
-        text = text.trim() + '. ';
+       text = text.trim() + '. ';
        baseString += text;
        $('#resultsText').val(baseString);
        showMetaData(alternatives[0]);
        // Only show alternatives if we're final
        alternativePrototype.showAlternatives(alternatives);
+       $.ajax({url: '/text',
+          type: 'POST',
+          data: {"text": text}
+        });
     } else {
       //text = text.replace(/ /g,'');      // remove whitespaces
       text = text.charAt(0).toUpperCase() + text.substring(1);
@@ -187,9 +191,9 @@ exports.showResult = function(msg, baseString, model) {
   return baseString;
 };
 
-$.subscribe('clearscreen', function() {
-  var $hypotheses = $('.hypotheses ul');
-  scrolled = false;
-  $hypotheses.empty();
-  alternativePrototype.clearString();
-});
+// $.subscribe('clearscreen', function() {
+//   var $hypotheses = $('.hypotheses ul');
+//   scrolled = false;
+//   $hypotheses.empty();
+//   alternativePrototype.clearString();
+// });

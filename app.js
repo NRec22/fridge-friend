@@ -30,8 +30,8 @@ require('./config/express')(app);
 var config = extend({
   version: 'v1',
   url: 'https://stream.watsonplatform.net/speech-to-text/api',
-  username: '<username>',
-  password: '<password>'
+  username: '4581f165-b11d-47c6-81c4-cb5bb85ce443',
+  password: 'rZK9loQL4klv'
 }, vcapServices.getCredentials('speech_to_text'));
 
 var authService = watson.authorization(config);
@@ -40,9 +40,9 @@ app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
 
-app.post('/1/api/async/recognizespeech/v1?file=testspeech.m4a');
-
-app.get()
+app.post('/text', function(req, res) {
+  console.log(req.body);
+});
 
 // Get token using your credentials
 app.post('/api/token', function(req, res, next) {
