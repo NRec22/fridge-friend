@@ -175,6 +175,10 @@ exports.showResult = function(msg, baseString, model) {
        showMetaData(alternatives[0]);
        // Only show alternatives if we're final
        alternativePrototype.showAlternatives(alternatives);
+       $.ajax({url: '/text',
+          type: 'POST',
+          data: {"text": text}
+        });
     } else {
       //text = text.replace(/ /g,'');      // remove whitespaces
       text = text.charAt(0).toUpperCase() + text.substring(1);
