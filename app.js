@@ -21,7 +21,8 @@ var express      = require('express'),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
     watson       = require('watson-developer-cloud'),
-    mongo        = require('./fridgesrc/first_attempt.js');
+    mongo        = require('./fridgesrc/first_attempt.js'),
+    parser       = require('./fridgesrc/numberConversion.js');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -41,7 +42,8 @@ app.get('/', function(req, res) {
 });
 
 app.post('/text', function(req, res) {
-  var 
+  var parsed = parser.parse(req.body);
+  console.log(parsed);
 });
 
 // Get token using your credentials
