@@ -9,7 +9,9 @@ MongoClient.connect(url, function(err, db) {
   console.log("Connected correctly to server");
   insertFood(db, 5, "apple", 14, function(){
       insertFood(db, 3, "orange", 7, function(){
-          db.close();
+          subtractFood(db, 2, "apple", function(){
+              db.close();
+          });
       });
   });
 });
@@ -27,5 +29,25 @@ var insertFood = function(db, num, name, days, callback){
             assert.equal(err, null);
             console.log("Inserted food into the inventory.");
             callback(result);
-        });
+        }
+    );
+};
+
+var subtractFood = function(db, prevNum, saidNum, name, callback){
+    var collection = db.collection('inventory');
+
+    //remove the food
+    collection.update(
+        {"type": name},
+        {
+            $set: {
+                "quantity": prevNum - saidNum
+            }
+        }, function(err, result){
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            console.log("Quantity changed in inventory.");
+            //callback(result);
+        }
+    );
 };
