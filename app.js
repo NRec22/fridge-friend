@@ -21,8 +21,7 @@ var express      = require('express'),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
     watson       = require('watson-developer-cloud'),
-    parse        = require('./my_modules/parseInput'),
-    mongo        = require('./my_modules/mongoOps');
+    parse        = require('./my_modules/parseInput');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -37,14 +36,23 @@ var config = extend({
 
 var authService = watson.authorization(config);
 
+var setTimer = Function () {
+  var now = getDate();
+  var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
+  if (millisTill10 < 0) {
+     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+  }
+  setTimeout(function(){updateExpiration;}, millisTill10);
+
+}
+
 app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
 
 app.post('/text', function(req, res) {
-  mongo(parse(req.body.text));
-
-  // console.log(parsed);
+  var parsed = parse(req.body.text);
+  console.log(parsed);
 });
 
 // Get token using your credentials
