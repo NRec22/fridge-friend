@@ -8,7 +8,7 @@ This program was created for HackUMass 2015 event.
 * Listens to your voice to add or remove contents.
 * Notifies you when contents are about to expire.
 
-### What software was used?
+### What software is used to help create Fridge Friend?
 
 * IBM Bluemix Speech to Text
 * MongoDB databases
