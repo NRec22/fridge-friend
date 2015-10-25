@@ -39,6 +39,12 @@ app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
 
+app.post('/text', function(req, res) {
+  console.log(req.body);
+  //var parsed = parser.parse(req.body);
+  //console.log(parsed);
+});
+
 // Get token using your credentials
 app.post('/api/token', function(req, res, next) {
   authService.getToken({url: config.url}, function(err, token) {
