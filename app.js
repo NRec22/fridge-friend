@@ -36,15 +36,15 @@ var config = extend({
 
 var authService = watson.authorization(config);
 
-var setTimer = Function () {
-  var now = getDate();
-  var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
-  if (millisTill10 < 0) {
-     millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
-  }
-  setTimeout(function(){updateExpiration;}, millisTill10);
-
-}
+// var setTimer = Function () {
+//   var now = getDate();
+//   var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
+//   if (millisTill10 < 0) {
+//      millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+//   }
+//   setTimeout(function(){updateExpiration;}, millisTill10);
+//
+// }
 
 app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
