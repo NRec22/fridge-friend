@@ -16,7 +16,7 @@
 'use strict';
 
 var scrolled = false,
-   * Copyright 2014 IBM Corp. All Rights Reserved.
+  
   textScrolled = false;
 
 var showTimestamp = function(timestamps, confidences) {
@@ -187,9 +187,9 @@ exports.showResult = function(msg, baseString, model) {
   return baseString;
 };
 
-$.subscribe('clearscreen', function() {
-  var $hypotheses = $('.hypotheses ul');
-  scrolled = false;
-  $hypotheses.empty();
-  alternativePrototype.clearString();
-});
+// $.subscribe('clearscreen', function() {
+//   var $hypotheses = $('.hypotheses ul');
+//   scrolled = false;
+//   $hypotheses.empty();
+//   alternativePrototype.clearString();
+// });
