@@ -168,7 +168,7 @@ exports.showResult = function(msg, baseString, model) {
     // if final results, append a new paragraph
     if (msg.results && msg.results[0] && msg.results[0].final) {
        text = text.slice(0, -1);
-       text = text.charAt(0).toUpperCase() + text.substring(1);
+       //text = text.charAt(0).toUpperCase() + text.substring(1);
        text = text.trim() + '. ';
        baseString += text;
        $('#resultsText').val(baseString);
@@ -181,7 +181,7 @@ exports.showResult = function(msg, baseString, model) {
         });
     } else {
       //text = text.replace(/ /g,'');      // remove whitespaces
-      text = text.charAt(0).toUpperCase() + text.substring(1);
+      //text = text.charAt(0).toUpperCase() + text.substring(1);
       $('#resultsText').val(baseString + text);
     }
   }
