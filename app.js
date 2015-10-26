@@ -21,7 +21,7 @@ var express      = require('express'),
     vcapServices = require('vcap_services'),
     extend       = require('util')._extend,
     watson       = require('watson-developer-cloud'),
-    parse        = require('./my_modules/parseInput'),
+    parse        = require('./my_modules/v2'),
     mongo        = require('./my_modules/plzwork');
 
 // Bootstrap application settings
@@ -43,7 +43,9 @@ app.get('/', function(req, res) {
 });
 var a;
 app.post('/text', function(req, res) {
-  a = mongo(parse(req.body.text));
+  var parsed = parse(req.body.text);
+  for(var i=0; i<parsed.length;i++)
+    mongo(parsed[i]);
 });
 
 app.get('/result', function(req,res) {

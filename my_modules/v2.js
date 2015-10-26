@@ -35,9 +35,9 @@ var parse = function(voicerec) {
 
   //var operator = voicerec.match(reOperator); //Array of key words
 
-  var parseResult = voicerec.match(reValuePair); //array [0]= matched string, [1]= amount, [2]= unit , [3]= type,  [n-1] = int index where it was found, [n] = input
+  // parseResult = voicerec.match(reValuePair); //array [0]= matched string, [1]= amount, [2]= unit , [3]= type,  [n-1] = int index where it was found, [n] = input
 
-  var numberOfObjects = (parseResult.length-3)/3;
+  //var numberOfObjects = (parseResult.length-3)/3;
 
   //operation string to boolean
   if(reAdd.test(voicerec)){
@@ -51,12 +51,27 @@ var parse = function(voicerec) {
   //   item.push()
   // }
 
+  var str = voicerec;
   var i = 1;
-  while (i<=numberOfObjects*3){
-    item.push({add:adding, quantity: parseInt(parseResult[i]), unit: parseResult[i+1], type: parseResult[i+2]});
-    i+=3;
+  while (i<=str.length){
+    //console.log("Im in the loop")
+    
+    var ValuePair = str.match(reValuePair);
+    if(ValuePair===null)
+      return;
+    //console.log(ValuePair[0]);
+    //console.log(ValuePair[4]);
+
+    var endIndex = ValuePair.index + ValuePair[0].length;
+
+    str = str.substring(endIndex -1, str.length)
+    if(!isNaN(parseInt(ValuePair[1]))){
+      item.push({add:adding, quantity: parseInt(ValuePair[1]), unit: ValuePair[2], type: ValuePair[3]});}
+    i=endIndex;
+    //console.log('end'+endIndex);
+    //console.log(str.length);
   }
-  console.log(parseResult);
+  //console.log(parseResult);
   console.log(item);
   return{item};
 

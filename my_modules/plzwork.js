@@ -4,6 +4,7 @@ var handleInp = function(input) {
     insertFood(db,input.quantity,input.type);
   else
     subtractFood(db,input.quantity,input.type);
+  console.log(db[0]);
   return db;
 }
 
