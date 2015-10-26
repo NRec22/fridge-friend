@@ -1,5 +1,4 @@
 # Welcome to Fridge-Friend!
-===================
 
 George Larionov, Neven Recchia, and Jan Reitz
 
