@@ -41,6 +41,7 @@ var authService = watson.authorization(config);
 app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
 });
+
 var a;
 app.post('/text', function(req, res) {
   a = mongo(parse(req.body.text));
