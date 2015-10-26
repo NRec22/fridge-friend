@@ -30,4 +30,4 @@ Regardless, here are changes that need to be made (feel free to edit):
     6. Add features, such as expiration dates, reminders, output to shopping list,
     etc, etc, etc.
     
-*by George
+\*by George
