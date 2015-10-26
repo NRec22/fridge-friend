@@ -4,7 +4,7 @@
 for this app to work. The main problem is that Bluemix Watson doesn't work
 anymore for us (big surprise), so we need to use something like HP Haven. 
 We also need to decide whether we will continue using a web app or try to make
-a phone app.
+a phone app. This file includes no hardware plans.
 
 ***
 
