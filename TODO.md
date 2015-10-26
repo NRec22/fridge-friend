@@ -11,7 +11,9 @@ a phone app. This file includes no hardware plans.
 Regardless, here are changes that need to be made (feel free to edit):
 
     1. Delete all the IBM from this repo so that we have no constraints and no
-    copyright issues. There is a reason I called this branch 'noWatson'.
+    copyright issues. There is a reason I called this branch 'noWatson'. (I am
+    in the process of doing this now, after I 'clean' this branch of irrelevant
+    material I will merge it with the master branch.)
     
     2. Get rid of the MongoDB part of this app. I have done some research and 
     MongoDB seems very well suited for dealing with JSON material, which most of
