@@ -1,4 +1,4 @@
-**Note:** As of this update this branch is a copy of master, using Bluemix Watson. I have created it because there is no sense in deleting all our progress with bluemix in case we edit master to use some other software.
+**Note:** As of this update this branch is a copy of master, using Bluemix Watson. I have created it because there is no sense in deleting all our progress with bluemix in case we edit master to use some other software and want to go back.
 -George
 
 # Speech to Text Browser Application
