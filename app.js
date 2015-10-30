@@ -22,7 +22,7 @@ var express      = require('express'),
     extend       = require('util')._extend,
     watson       = require('watson-developer-cloud'),
     parse        = require('./my_modules/v2'),
-    mongo        = require('./my_modules/plzwork');
+    db           = require('./my_modules/plzwork');
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -40,18 +40,26 @@ var authService = watson.authorization(config);
 
 app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
+  // for testing purposes:
+  var parsed = parse("insert five apples and three oranges");
+  console.log('printing parsed from app.js: ');
+  console.log(parsed);
+  // for(var i=0; i<parsed.length; i++)
+  //   db(parsed[i]);
 });
 
-var a;
+// var a;
 app.post('/text', function(req, res) {
+  // for testing purposes:
+  //var parsed = parse("insert five apples and three oranges");
   var parsed = parse(req.body.text);
-  for(var i=0; i<parsed.length;i++)
-    mongo(parsed[i]);
+  for(var i=0; i<parsed.length; i++)
+    db(parsed[i]);
 });
 
-app.get('/result', function(req,res) {
-  res.render('result', {text: a[0].type});
-});
+// app.get('/result', function(req,res) {
+//   res.render('result', {text: a[0].type});
+// });
 
 // Get token using your credentials
 app.post('/api/token', function(req, res, next) {

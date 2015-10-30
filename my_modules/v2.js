@@ -63,6 +63,8 @@ var parse = function(voicerec) {
     //console.log(ValuePair[4]);
 
     var endIndex = ValuePair.index + ValuePair[0].length;
+    
+    console.log(ValuePair);
 
     str = str.substring(endIndex -1, str.length)
     if(!isNaN(parseInt(ValuePair[1]))){
@@ -72,7 +74,7 @@ var parse = function(voicerec) {
     //console.log(str.length);
   }
   //console.log(parseResult);
-  console.log(item);
+  // console.log(item);
   return{item};
 
 }

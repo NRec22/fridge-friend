@@ -51,14 +51,14 @@ var parse = function(voicerec) {
   //   item.push()
   // }
 
+  console.log(parseInt);
   var i = 1;
   while (i<=numberOfObjects*3){
     item.push({add:adding, quantity: parseInt(parseResult[i]), unit: parseResult[i+1], type: parseResult[i+2]});
     i+=3;
   }
-  console.log(parseResult);
-  console.log(item);
-  return{item};
+
+  return item;
 
 }
 module.exports = parse;

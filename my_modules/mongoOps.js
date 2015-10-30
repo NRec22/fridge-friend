@@ -24,7 +24,7 @@ MongoClient.connect(url, function(err, db) {
 
 var handleInp = function(input) {
 
-  input = {add:true,quantity:3,unit:'',type:'apple'}
+//   input = {add:true,quantity:3,unit:'',type:'apple'}
   if(input[0]===true)
     insertFood(this.db,input.quantity,input.type);
   else
