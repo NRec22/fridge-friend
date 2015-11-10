@@ -40,7 +40,7 @@ var authService = watson.authorization(config);
 
 app.get('/', function(req, res) {
   res.render('index', { ct: req._csrfToken });
-  var parsed = parse('insert five apples and three oranges');
+  var parsed = parse(req.body.text);
   console.log(parsed);
   // for(var i=0; i<parsed.length;i++)
   //   mongo(parsed[i]);
