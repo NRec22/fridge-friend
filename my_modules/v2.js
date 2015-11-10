@@ -19,7 +19,7 @@ var parse = function(voicerec) {
   voicerec = voicerec.replace(/four/,"4");
   voicerec = voicerec.replace(/three/,"3");
   voicerec = voicerec.replace(/two|pair of/,"2");
-  voicerec = voicerec.replace(/an|one/,"1");
+  voicerec = voicerec.replace(/an |one /,"1 ");
   voicerec = voicerec.replace(/three quarters of a|three quarter|three quarters of an/,"0.75");
   voicerec = voicerec.replace(/half|half an|half a/,"0.5");
   voicerec = voicerec.replace(/third|third of a|third of an/,"0.33");
@@ -64,6 +64,8 @@ var parse = function(voicerec) {
 
     var endIndex = ValuePair.index + ValuePair[0].length;
 
+    //console.log(ValuePair);
+
     str = str.substring(endIndex -1, str.length)
     if(!isNaN(parseInt(ValuePair[1]))){
       item.push({add:adding, quantity: parseInt(ValuePair[1]), unit: ValuePair[2], type: ValuePair[3]});}
@@ -72,7 +74,7 @@ var parse = function(voicerec) {
     //console.log(str.length);
   }
   //console.log(parseResult);
-  console.log(item);
+  // console.log(item);
   return{item};
 
 }
